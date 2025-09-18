@@ -38,12 +38,15 @@ const Home = () => {
   // Styles
   const pageStyle = {
     minHeight: '100vh',
+    width: '100vw',
+    margin: 0,
     background: 'linear-gradient(135deg, #0f766e 0%, #0891b2 50%, #1e40af 100%)',
     position: 'relative',
     overflow: 'auto',
     paddingTop: '80px',
     fontFamily: '"Inter", sans-serif',
     color: '#fff',
+    boxSizing: 'border-box',
   };
 
   const backgroundPattern = {
@@ -69,11 +72,8 @@ const Home = () => {
     minHeight: 'calc(100vh - 80px)',
     display: 'flex',
     flexDirection: 'column',
-    maxWidth: '1200px',
+    maxWidth: '1400px',
     margin: '0 auto',
-    '@media (max-width: 640px)': {
-      padding: '15px',
-    },
   };
 
   const headerStyle = {
@@ -107,9 +107,6 @@ const Home = () => {
     gap: '15px',
     marginBottom: '40px',
     padding: '0 10px',
-    '@media (max-width: 640px)': {
-      gridTemplateColumns: '1fr',
-    },
   };
 
   const statCardStyle = {
@@ -133,9 +130,6 @@ const Home = () => {
     gap: '20px',
     marginBottom: '40px',
     padding: '0 10px',
-    '@media (max-width: 640px)': {
-      gridTemplateColumns: '1fr',
-    },
   };
 
   const categoriesGridStyle = {
@@ -144,9 +138,6 @@ const Home = () => {
     gap: '25px',
     padding: '0 10px',
     marginBottom: '40px',
-    '@media (max-width: 640px)': {
-      gridTemplateColumns: '1fr',
-    },
   };
 
   const welcomeSectionStyle = {
@@ -157,6 +148,29 @@ const Home = () => {
     marginBottom: '40px',
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     textAlign: 'center',
+  };
+
+  const buttonContainerStyle = {
+    display: 'flex',
+    gap: '1rem',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  };
+
+  const buttonStyle = {
+    padding: '0.75rem 1.5rem',
+    backgroundColor: '#06b6d4',
+    color: '#fff',
+    borderRadius: '8px',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    transition: 'all 0.3s ease',
+    boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)',
+    fontSize: '0.95rem',
   };
 
   const featuredLessonStyle = {
@@ -177,9 +191,6 @@ const Home = () => {
     gap: '25px',
     padding: '0 10px',
     marginBottom: '40px',
-    '@media (max-width: 640px)': {
-      gridTemplateColumns: '1fr',
-    },
   };
 
   const cardStyle = {
@@ -235,20 +246,6 @@ const Home = () => {
     position: 'relative',
     zIndex: 2,
     flex: 1,
-  };
-
-  const buttonStyle = {
-    padding: '0.75rem 1.5rem',
-    backgroundColor: '#06b6d4',
-    color: '#fff',
-    borderRadius: '5px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '0.5rem',
-    transition: 'background 0.3s',
   };
 
   const floatingElementStyle = {
@@ -415,304 +412,428 @@ const Home = () => {
   };
 
   return (
-    <div style={pageStyle}>
-      {/* Background Pattern */}
-      <div style={backgroundPattern} />
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .container {
+            padding: 15px !important;
+          }
+          .header {
+            margin-bottom: 30px !important;
+          }
+          .main-title {
+            font-size: clamp(1.8rem, 7vw, 3rem) !important;
+          }
+          .subtitle {
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem) !important;
+          }
+          .welcome-section {
+            padding: 1.5rem !important;
+          }
+          .button-container {
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+          }
+          .button {
+            display: inline-block !important;
+            width: 100% !important;
+            padding: 0.6rem 1rem !important;
+            font-size: 0.9rem !important;
+            margin: 0.5rem 0 !important;
+            justify-content: center !important;
+          }
+          .stats-container {
+            grid-template-columns: 1fr !important;
+            gap: 12px !important;
+          }
+          .quick-actions, .categories-grid, .testimonials {
+            grid-template-columns: 1fr !important;
+            gap: 15px !important;
+          }
+          .card, .quick-action-card {
+            padding: 20px !important;
+            min-height: 180px !important;
+          }
+          .card-title {
+            font-size: clamp(16px, 3.5vw, 18px) !important;
+          }
+          .card-text {
+            font-size: clamp(13px, 3vw, 14px) !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .container {
+            padding: 10px !important;
+          }
+          .header {
+            margin-bottom: 20px !important;
+          }
+          .main-title {
+            font-size: clamp(1.5rem, 6vw, 2.5rem) !important;
+          }
+          .subtitle {
+            font-size: clamp(0.8rem, 3vw, 1rem) !important;
+          }
+          .welcome-section {
+            padding: 1rem !important;
+          }
+          .button {
+            padding: 0.5rem 0.75rem !important;
+            font-size: 0.85rem !important;
+            margin: 0.4rem 0 !important;
+          }
+          .stats-container {
+            gap: 10px !important;
+          }
+          .quick-actions, .categories-grid, .testimonials {
+            gap: 12px !important;
+          }
+          .card, .quick-action-card {
+            padding: 15px !important;
+            min-height: 160px !important;
+          }
+          .card-title {
+            font-size: clamp(14px, 3vw, 16px) !important;
+          }
+          .card-text {
+            font-size: clamp(12px, 2.5vw, 13px) !important;
+          }
+        }
+        .button:hover {
+          background-color: #0e7490 !important;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+          transform: translateY(-2px) !important;
+        }
+        .clear-button:hover {
+          background-color: #dc2626 !important;
+        }
+        .button:active {
+          transform: translateY(0) !important;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+        }
+      `}</style>
 
-      {/* Floating Elements */}
-      <motion.div
-        style={{
-          ...floatingElementStyle,
-          width: '80px',
-          height: '80px',
-          top: '15%',
-          left: '5%',
-        }}
-        animate={{ y: [0, -15, 0], rotate: [0, 180, 360] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-      />
-      <motion.div
-        style={{
-          ...floatingElementStyle,
-          width: '50px',
-          height: '50px',
-          top: '25%',
-          right: '8%',
-        }}
-        animate={{ y: [0, 15, 0], x: [0, 8, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      />
+      <div style={pageStyle}>
+        {/* Background Pattern */}
+        <div style={backgroundPattern} />
 
-      <motion.div
-        style={containerStyle}
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-      >
-        {/* Header Section */}
-        <motion.div style={headerStyle} variants={titleVariants}>
-          <motion.h1
-            style={mainTitleStyle}
-            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-          >
-            Master English
-          </motion.h1>
-          <motion.p style={subtitleStyle} variants={itemVariants}>
-            Transform your language skills with AI-powered learning
-          </motion.p>
-        </motion.div>
-
-        {/* Welcome Section */}
+        {/* Floating Elements */}
         <motion.div
-          style={welcomeSectionStyle}
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <h2 style={{ fontSize: '1.8rem', fontWeight: '600', marginBottom: '1rem' }}>
-            Welcome Back!
-          </h2>
-          <p style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '1rem' }}>
-            You've completed {summary.completedLessons} of {lessons.length} lessons.
-            {summary.completedLessons > 0
-              ? ` Your average score is ${summary.averageScore.toFixed(2)}%.`
-              : ' Start a lesson to track your progress!'}
-          </p>
-          <button
-            style={buttonStyle}
-            onClick={() => handleNavigation('/lessons')}
-          >
-            <Play size={20} /> Get Started
-          </button>
-          {summary.completedLessons > 0 && (
-            <button
-              style={{ ...buttonStyle, backgroundColor: '#ef4444', marginLeft: '1rem' }}
-              onClick={handleClearProgress}
-            >
-              <Trash2 size={20} /> Clear Progress
-            </button>
-          )}
-        </motion.div>
+          style={{
+            ...floatingElementStyle,
+            width: '80px',
+            height: '80px',
+            top: '15%',
+            left: '5%',
+          }}
+          animate={{ y: [0, -15, 0], rotate: [0, 180, 360] }}
+          transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          style={{
+            ...floatingElementStyle,
+            width: '50px',
+            height: '50px',
+            top: '25%',
+            right: '8%',
+          }}
+          animate={{ y: [0, 15, 0], x: [0, 8, 0] }}
+          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        />
 
-        {/* Featured Lesson */}
-        {recentLesson && (
+        <motion.div
+          style={containerStyle}
+          className="container"
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+        >
+          {/* Header Section */}
+          <motion.div style={headerStyle} className="header" variants={titleVariants}>
+            <motion.h1
+              style={mainTitleStyle}
+              className="main-title"
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+            >
+              Master English
+            </motion.h1>
+            <motion.p style={subtitleStyle} className="subtitle" variants={itemVariants}>
+              Transform your language skills with AI-powered learning
+            </motion.p>
+          </motion.div>
+
+          {/* Welcome Section */}
           <motion.div
-            style={featuredLessonStyle}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            style={welcomeSectionStyle}
+            className="welcome-section"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h2 style={{ fontSize: '1.8rem', fontWeight: '600', marginBottom: '1rem' }}>
-              Featured Lesson
+              Welcome Back!
             </h2>
-            <motion.div
-              style={cardStyle}
-              whileHover={cardHoverVariants.hover}
-              whileTap={cardHoverVariants.tap}
-              onClick={() => handleNavigation(`/lessons/${recentLesson.id}`)}
-            >
-              <motion.div
-                style={iconContainerStyle}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+            <p style={{ fontSize: '1.1rem', opacity: 0.9, marginBottom: '1.5rem' }}>
+              You've completed {summary.completedLessons} of {lessons.length} lessons.
+              {summary.completedLessons > 0
+                ? ` Your average score is ${summary.averageScore.toFixed(2)}%.`
+                : ' Start a lesson to track your progress!'}
+            </p>
+            <div style={buttonContainerStyle} className="button-container">
+              <motion.button
+                style={buttonStyle}
+                className="button"
+                onClick={() => handleNavigation('/lessons')}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                aria-label="Start learning lessons"
               >
-                <BookOpen size={32} />
-              </motion.div>
-              <h3 style={cardTitleStyle}>{recentLesson.title}</h3>
-              <p style={cardTextStyle}>
-                {recentLesson.description || 'Explore this lesson to boost your skills!'}
-              </p>
-              <motion.div
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '15px' }}
-                whileHover={{ x: 5 }}
-              >
-                <ChevronRight size={20} />
-              </motion.div>
-            </motion.div>
+                <Play size={20} /> Get Started
+              </motion.button>
+              {summary.completedLessons > 0 && (
+                <motion.button
+                  style={{ ...buttonStyle, backgroundColor: '#ef4444' }}
+                  className="button clear-button"
+                  onClick={handleClearProgress}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  aria-label="Clear all progress"
+                >
+                  <Trash2 size={20} /> Clear Progress
+                </motion.button>
+              )}
+            </div>
           </motion.div>
-        )}
 
-        {/* Stats Section */}
-        <motion.div style={statsContainerStyle} variants={containerVariants}>
-          {stats.map((stat, index) => (
+          {/* Featured Lesson */}
+          {recentLesson && (
             <motion.div
-              key={stat.label}
-              style={statCardStyle}
-              variants={itemVariants}
-              whileHover={{ scale: 1.05, rotate: 1 }}
-              whileTap={{ scale: 0.95 }}
+              style={featuredLessonStyle}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <motion.div variants={pulseVariants} animate="animate">
-                <stat.icon size={32} color="#fff" />
-              </motion.div>
+              <h2 style={{ fontSize: '1.8rem', fontWeight: '600', marginBottom: '1rem' }}>
+                Featured Lesson
+              </h2>
               <motion.div
-                style={{ fontSize: 'clamp(20px, 5vw, 24px)', fontWeight: 'bold', margin: '8px 0' }}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ delay: 0.3 + index * 0.1, type: 'spring' }}
-              >
-                {stat.value}
-              </motion.div>
-              <div style={{ fontSize: 'clamp(12px, 3vw, 14px)', opacity: 0.8 }}>
-                {stat.label}
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Quick Actions Section */}
-        <motion.div style={quickActionsStyle} variants={containerVariants}>
-          {quickActions.map((action, index) => (
-            <motion.div
-              key={action.name}
-              style={{ ...quickActionCardStyle, background: action.color }}
-              variants={itemVariants}
-              whileHover={cardHoverVariants.hover}
-              whileTap={cardHoverVariants.tap}
-              onClick={() => handleNavigation(action.path)}
-            >
-              <motion.div
-                style={iconContainerStyle}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <action.icon size={28} />
-              </motion.div>
-              <motion.h3
-                style={cardTitleStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.4 + index * 0.1 }}
-              >
-                {action.name}
-              </motion.h3>
-              <motion.p
-                style={cardTextStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 0.5 + index * 0.1 }}
-              >
-                {action.description}
-              </motion.p>
-              <motion.div
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '15px' }}
-                whileHover={{ x: 5 }}
-              >
-                <ChevronRight size={20} />
-              </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Learning Categories */}
-        <motion.div style={categoriesGridStyle} variants={containerVariants}>
-          {categories.map((category, index) => (
-            <motion.div
-              key={category.name}
-              style={{ ...cardStyle, background: category.gradient }}
-              variants={itemVariants}
-              whileHover={cardHoverVariants.hover}
-              whileTap={cardHoverVariants.tap}
-              onClick={() => handleNavigation(category.path)}
-            >
-              <motion.div
-                style={iconContainerStyle}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
-              >
-                <category.icon size={32} />
-              </motion.div>
-              <motion.h3
-                style={cardTitleStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-              >
-                {category.name}
-              </motion.h3>
-              <motion.p
-                style={cardTextStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-              >
-                {category.description}
-              </motion.p>
-              <motion.div
-                style={{
-                  width: '100%',
-                  height: '3px',
-                  background: 'rgba(255,255,255,0.2)',
-                  borderRadius: '2px',
-                  marginTop: '20px',
-                  overflow: 'hidden',
-                }}
-                initial={{ width: 0 }}
-                animate={{ width: `${60 + index * 15}%` }}
-                transition={{ delay: 0.8 + index * 0.2, duration: 1.5 }}
+                style={cardStyle}
+                whileHover={cardHoverVariants.hover}
+                whileTap={cardHoverVariants.tap}
+                onClick={() => handleNavigation(`/lessons/${recentLesson.id}`)}
               >
                 <motion.div
-                  style={{
-                    height: '100%',
-                    background: '#22c55e',
-                    borderRadius: '2px',
-                  }}
-                />
+                  style={iconContainerStyle}
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <BookOpen size={32} />
+                </motion.div>
+                <h3 style={cardTitleStyle} className="card-title">{recentLesson.title}</h3>
+                <p style={cardTextStyle} className="card-text">
+                  {recentLesson.description || 'Explore this lesson to boost your skills!'}
+                </p>
+                <motion.div
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '15px' }}
+                  whileHover={{ x: 5 }}
+                >
+                  <ChevronRight size={20} />
+                </motion.div>
               </motion.div>
             </motion.div>
-          ))}
-        </motion.div>
+          )}
 
-        {/* Testimonials Section */}
-        <motion.div style={testimonialsStyle} variants={containerVariants}>
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              style={cardStyle}
-              variants={itemVariants}
-              whileHover={cardHoverVariants.hover}
-              whileTap={cardHoverVariants.tap}
-            >
+          {/* Stats Section */}
+          <motion.div style={statsContainerStyle} className="stats-container" variants={containerVariants}>
+            {stats.map((stat, index) => (
               <motion.div
-                style={iconContainerStyle}
-                whileHover={{ rotate: 360 }}
-                transition={{ duration: 0.6 }}
+                key={stat.label}
+                style={statCardStyle}
+                variants={itemVariants}
+                whileHover={{ scale: 1.05, rotate: 1 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <Star size={32} />
+                <motion.div variants={pulseVariants} animate="animate">
+                  <stat.icon size={32} color="#fff" />
+                </motion.div>
+                <motion.div
+                  style={{ fontSize: 'clamp(20px, 5vw, 24px)', fontWeight: 'bold', margin: '8px 0' }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ delay: 0.3 + index * 0.1, type: 'spring' }}
+                >
+                  {stat.value}
+                </motion.div>
+                <div style={{ fontSize: 'clamp(12px, 3vw, 14px)', opacity: 0.8 }}>
+                  {stat.label}
+                </div>
               </motion.div>
-              <motion.h3
-                style={cardTitleStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 + index * 0.1 }}
-              >
-                {testimonial.name}
-              </motion.h3>
-              <motion.p
-                style={cardTextStyle}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.9 }}
-                transition={{ delay: 0.7 + index * 0.1 }}
-              >
-                {testimonial.text}
-              </motion.p>
+            ))}
+          </motion.div>
+
+          {/* Quick Actions Section */}
+          <motion.div style={quickActionsStyle} className="quick-actions" variants={containerVariants}>
+            {quickActions.map((action, index) => (
               <motion.div
-                style={{ display: 'flex', justifyContent: 'center', gap: '5px', marginTop: '10px' }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 + index * 0.1 }}
+                key={action.name}
+                style={{ ...quickActionCardStyle, background: action.color }}
+                className="quick-action-card"
+                variants={itemVariants}
+                whileHover={cardHoverVariants.hover}
+                whileTap={cardHoverVariants.tap}
+                onClick={() => handleNavigation(action.path)}
               >
-                {Array.from({ length: Math.floor(testimonial.rating) }).map((_, i) => (
-                  <Star key={i} size={16} fill="#facc15" color="#facc15" />
-                ))}
+                <motion.div
+                  style={iconContainerStyle}
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <action.icon size={28} />
+                </motion.div>
+                <motion.h3
+                  style={cardTitleStyle}
+                  className="card-title"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.4 + index * 0.1 }}
+                >
+                  {action.name}
+                </motion.h3>
+                <motion.p
+                  style={cardTextStyle}
+                  className="card-text"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.9 }}
+                  transition={{ delay: 0.5 + index * 0.1 }}
+                >
+                  {action.description}
+                </motion.p>
+                <motion.div
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: '15px' }}
+                  whileHover={{ x: 5 }}
+                >
+                  <ChevronRight size={20} />
+                </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
+            ))}
+          </motion.div>
+
+          {/* Learning Categories */}
+          <motion.div style={categoriesGridStyle} className="categories-grid" variants={containerVariants}>
+            {categories.map((category, index) => (
+              <motion.div
+                key={category.name}
+                style={{ ...cardStyle, background: category.gradient }}
+                className="card"
+                variants={itemVariants}
+                whileHover={cardHoverVariants.hover}
+                whileTap={cardHoverVariants.tap}
+                onClick={() => handleNavigation(category.path)}
+              >
+                <motion.div
+                  style={iconContainerStyle}
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <category.icon size={32} />
+                </motion.div>
+                <motion.h3
+                  style={cardTitleStyle}
+                  className="card-title"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                >
+                  {category.name}
+                </motion.h3>
+                <motion.p
+                  style={cardTextStyle}
+                  className="card-text"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.9 }}
+                  transition={{ delay: 0.7 + index * 0.1 }}
+                >
+                  {category.description}
+                </motion.p>
+                <motion.div
+                  style={{
+                    width: '100%',
+                    height: '3px',
+                    background: 'rgba(255,255,255,0.2)',
+                    borderRadius: '2px',
+                    marginTop: '20px',
+                    overflow: 'hidden',
+                  }}
+                  initial={{ width: 0 }}
+                  animate={{ width: `${60 + index * 15}%` }}
+                  transition={{ delay: 0.8 + index * 0.2, duration: 1.5 }}
+                >
+                  <motion.div
+                    style={{
+                      height: '100%',
+                      background: '#22c55e',
+                      borderRadius: '2px',
+                    }}
+                  />
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Testimonials Section */}
+          <motion.div style={testimonialsStyle} className="testimonials" variants={containerVariants}>
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.name}
+                style={cardStyle}
+                className="card"
+                variants={itemVariants}
+                whileHover={cardHoverVariants.hover}
+                whileTap={cardHoverVariants.tap}
+              >
+                <motion.div
+                  style={iconContainerStyle}
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <Star size={32} />
+                </motion.div>
+                <motion.h3
+                  style={cardTitleStyle}
+                  className="card-title"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                >
+                  {testimonial.name}
+                </motion.h3>
+                <motion.p
+                  style={cardTextStyle}
+                  className="card-text"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 0.9 }}
+                  transition={{ delay: 0.7 + index * 0.1 }}
+                >
+                  {testimonial.text}
+                </motion.p>
+                <motion.div
+                  style={{ display: 'flex', justifyContent: 'center', gap: '5px', marginTop: '10px' }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 + index * 0.1 }}
+                >
+                  {Array.from({ length: Math.floor(testimonial.rating) }).map((_, i) => (
+                    <Star key={i} size={16} fill="#facc15" color="#facc15" />
+                  ))}
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
+      </div>
+    </>
   );
 };
-  
+
 export default Home;

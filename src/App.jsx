@@ -1,3 +1,4 @@
+
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Home from './components/Home';
@@ -15,7 +16,7 @@ import AdminDashboard from './components/Admin/AdminDashboard';
 const ProtectedRoute = ({ children, isAdminRoute = false }) => {
   const user = JSON.parse(localStorage.getItem('currentUser') || 'null');
   const admin = JSON.parse(localStorage.getItem('currentAdmin') || 'null');
-  const isAuthenticated = isAdminRoute ? !!admin : !!user;
+  const isAuthenticated = isAdminRoute ? !!admin : !!(user || admin); // Admins can access user routes
 
   if (!isAuthenticated) {
     return <Navigate to={isAdminRoute ? '/admin/login' : '/login'} replace />;
